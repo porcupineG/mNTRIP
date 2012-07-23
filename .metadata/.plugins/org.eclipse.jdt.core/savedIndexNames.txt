@@ -1,0 +1,7 @@
+INDEX VERSION 1.126+/home/porcupine/mNTRIP/.metadata/.plugins/org.eclipse.jdt.core
+1876147570.index
+1615860409.index
+567236670.index
+101064372.index
+3141903599.index
+1158757423.index

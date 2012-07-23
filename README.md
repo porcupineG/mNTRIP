@@ -1,4 +1,0 @@
-mNTRIP
-======
-
-Mobile NTRIP Project
