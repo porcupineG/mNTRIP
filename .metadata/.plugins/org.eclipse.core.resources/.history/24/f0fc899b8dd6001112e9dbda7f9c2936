@@ -1,0 +1,72 @@
+package com.mntripclient;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
+
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+
+public class MainActivity extends MapActivity {
+
+	private GPSOPointOverlay gpsPhoneOverlay;
+	private GPSOPointOverlay gpsBluetoothOverlay;
+	private GPSOPointOverlay dgpsBluetoothOverlay;
+	private GPSOPointOverlay dgpsBluetoothBufferedOverlay;
+	private GPSRouteOverlay gpsRouteOverlay;
+	
+	private LocationManager locationManager;
+	private List<Overlay> mapOverlays;
+	private MapView mapView;
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.mapview);
+        
+        mapView = (MapView) findViewById(R.id.mapView);
+        mapView.setSatellite(true);
+        mapView.setBuiltInZoomControls(true);
+        
+        mapOverlays = mapView.getOverlays();
+        
+        gpsPhoneOverlay = new GPSOPointOverlay(this.getResources().getDrawable(R.drawable.redpoint), mapView);
+        gpsBluetoothOverlay = new GPSOPointOverlay(this.getResources().getDrawable(R.drawable.greenpoint), mapView);
+        dgpsBluetoothOverlay = new GPSOPointOverlay(this.getResources().getDrawable(R.drawable.bluepoint), mapView);
+        dgpsBluetoothBufferedOverlay = new GPSOPointOverlay(this.getResources().getDrawable(R.drawable.yellowpoint), mapView);
+        gpsRouteOverlay = new GPSRouteOverlay(mapView);
+        
+        gpsRouteOverlay.addGeoPoint(new GeoPoint(0, 0));
+        gpsRouteOverlay.addGeoPoint(new GeoPoint(20, 20));
+        
+        
+        mapOverlays.add(gpsRouteOverlay);
+        mapOverlays.add(gpsPhoneOverlay);
+        mapOverlays.add(gpsBluetoothOverlay);
+        mapOverlays.add(dgpsBluetoothOverlay);
+        mapOverlays.add(dgpsBluetoothBufferedOverlay);
+        
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new GPSPhoneListener(gpsPhoneOverlay));
+        
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mapview, menu);
+        return true;
+    }
+
+	@Override
+	protected boolean isRouteDisplayed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+}

@@ -1,0 +1,24 @@
+package com.mntripclient;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import android.R.string;
+
+public final class FileLog {
+	private final static FileLog instance = new FileLog();
+	private static FileOutputStream fileOutpurStream;
+	
+    public static FileLog getInstance() {
+        return instance;
+    }
+	
+	static void log(string s) throws FileNotFoundException {
+		FileOutputStream s = new FileOutputStream("nMTRIPClient.log", true);
+		//fileOutpurStream.wr;
+	}
+	
+	private FileLog() {
+    
+	}
+}

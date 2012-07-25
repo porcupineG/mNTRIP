@@ -1,0 +1,15 @@
+1343226010378	Rename type 'GPSOverlay'
+1343226075607	Rename type 'GPSPhoneOverlay'
+1343226404090	Copy file
+1343226861368	Delete element
+1343227426114	Rename resource 'activity_main.xml'
+1343229241443	Rename resource 'activity_main.xml'
+1343230521010	Rename method 'addOneOverlay'
+1343231136371	Rename field 'fileOutpurStream'
+1343241714491	Rename type 'GPSOverlay'
+1343241726281	Copy compilation unit
+1343241730160	Delete element
+1343241747455	Rename type 'CopyOfGPSOPointverlay'
+1343241756556	Rename type 'GPSOPointverlay'
+1343242678516	Rename type 'GPSORouteOverlay'
+1343248089658	Rename method 'initHTTPThread'

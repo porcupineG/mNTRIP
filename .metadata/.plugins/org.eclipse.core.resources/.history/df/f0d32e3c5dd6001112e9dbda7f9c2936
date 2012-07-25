@@ -1,0 +1,33 @@
+package com.mntripclient;
+
+import com.google.android.maps.GeoPoint;
+
+import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
+
+public class GPSPhoneListener implements LocationListener {
+
+	private GeoPoint point;
+	
+	public void onLocationChanged(Location location) {
+		point = new GeoPoint((int) (location.getLatitude() * 1000000.0), (int) (location.getLongitude() * 1000000.0));
+		FileLog.getInstance().log("dupka")
+	}
+
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

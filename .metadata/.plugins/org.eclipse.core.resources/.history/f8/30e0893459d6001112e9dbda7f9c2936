@@ -1,0 +1,7 @@
+package com.mntripclient;
+
+import android.location.LocationListener;
+
+public class GPSPhoneListener implements LocationListener {
+
+}

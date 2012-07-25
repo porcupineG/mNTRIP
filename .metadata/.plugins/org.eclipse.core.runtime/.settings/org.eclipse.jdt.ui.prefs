@@ -1,3 +1,4 @@
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="com.google.android.maps.GeoPoint"><rhs name\="com.google.android.maps.GeoPoint"/></lhs><lhs name\="android.location.LocationListener"><rhs name\="com.mntripclient.GPSPhoneListener"/></lhs><lhs name\="com.mntripclient.GPSPhoneListener"><rhs name\="com.mntripclient.GPSPhoneListener"/></lhs><lhs name\="com.google.android.maps.Overlay"><rhs name\="com.mntripclient.GPSRouteOverlay"/></lhs><lhs name\="com.mntripclient.GPSRouteOverlay"><rhs name\="com.mntripclient.GPSRouteOverlay"/></lhs><lhs name\="android.graphics.Point"><rhs name\="android.graphics.Point"/></lhs><lhs name\="android.os.Parcelable"><rhs name\="android.graphics.RectF"/></lhs><lhs name\="android.graphics.RectF"><rhs name\="android.graphics.RectF"/></lhs><lhs name\="java.io.Closeable"><rhs name\="java.io.FileInputStream"/></lhs><lhs name\="java.io.InputStream"><rhs name\="java.io.FileInputStream"/></lhs><lhs name\="java.io.FileInputStream"><rhs name\="java.io.FileInputStream"/></lhs></history>
 content_assist_number_of_computers=15
 content_assist_proposals_background=255,255,255
 content_assist_proposals_foreground=24,22,21
@@ -6,6 +7,10 @@ fontPropagated=true
 org.eclipse.jdt.ui.editor.tab.width=
 org.eclipse.jdt.ui.formatterprofiles.version=12
 org.eclipse.jdt.ui.javadoclocations.migrated=true
+org.eclipse.jdt.ui.text.code_templates_migrated=true
+org.eclipse.jdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.jdt.ui.text.templates_migrated=true
 org.eclipse.jface.textfont=1|Monospace|10.0|0|GTK|1|;
 proposalOrderMigrated=true
 spelling_locale_initialized=true

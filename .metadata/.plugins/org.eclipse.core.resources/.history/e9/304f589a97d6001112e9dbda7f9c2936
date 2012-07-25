@@ -1,0 +1,68 @@
+package com.mntripclient;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.params.HttpConnectionParams;
+
+import android.R.string;
+import android.net.http.AndroidHttpClient;
+import android.util.Log;
+
+public class NTRIPCasterDownloadTask implements Runnable {
+
+	private static String MNTRIPCASTER_CADDRESS = "http://mntripcaster.appspot.com/";
+	private static String MOUNTPOINT = "mntripstr0";
+	
+	private final ExecutorService httpExecutorService;
+	private AndroidHttpClient httpClient;
+	private URI uri;
+
+	private HttpGet request;
+	private HttpResponse response;
+	
+	private long contentLength;
+	private byte [] content;
+	
+	public NTRIPCasterDownloadTask(ExecutorService httpExecutorService) {
+		this.httpExecutorService = httpExecutorService;
+		httpClient = AndroidHttpClient.newInstance("mNTRIPCasterDownload");
+		
+		HttpConnectionParams.setTcpNoDelay(httpClient.getParams(), true);
+		HttpConnectionParams.setSoTimeout(httpClient.getParams(), 100);
+		
+		try {
+			uri = new URI(MNTRIPCASTER_CADDRESS + MOUNTPOINT);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		
+		request.setURI(uri);
+		request = new HttpGet();
+		
+		try {
+			response = httpClient.execute(request);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void run() {
+		try {
+			contentLength = response.getEntity().getContentLength();
+			content = new byte[(int) contentLength];
+			response.getEntity().getContent().read(content);
+			Log.d("NTRIPCasterDownloadTask", new String(content));
+		} catch (Exception e) {
+		}
+	
+		Future<?> future = httpExecutorService.submit(this);
+		Thread.sleep(1000);
+	}
+
+}
