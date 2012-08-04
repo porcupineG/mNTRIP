@@ -1,0 +1,51 @@
+package com.mntripclient;
+
+import java.util.concurrent.ArrayBlockingQueue;
+
+import android.util.Log;
+
+public class CoordinatesTask implements Runnable {
+
+	private ArrayBlockingQueue<byte[]> bluetoothCoordinatesQueue;
+	private  GPSOPointOverlay gpsBluetoothOverlay;
+	private GPSOPointOverlay dgpsBluetoothOverlay;
+	private GPSOPointOverlay dgpsBluetoothBufferedOverlay;
+	
+	private StringBuffer coordinate;
+	
+	public CoordinatesTask(ArrayBlockingQueue<byte[]> bluetoothCoordinatesQueue, GPSOPointOverlay gpsBluetoothOverlay, GPSOPointOverlay dgpsBluetoothOverlay,
+			GPSOPointOverlay dgpsBluetoothBufferedOverlay) {
+		
+		this.bluetoothCoordinatesQueue = bluetoothCoordinatesQueue;
+		this.gpsBluetoothOverlay = gpsBluetoothOverlay;
+		this.dgpsBluetoothBufferedOverlay = dgpsBluetoothBufferedOverlay;
+		this.dgpsBluetoothOverlay = dgpsBluetoothOverlay;
+		
+		coordinate = new StringBuffer();
+		
+		// TODO Auto-generated constructor stub
+	}
+
+	public void run() {
+		while (true) {
+			try {
+				parse(bluetoothCoordinatesQueue.take());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void parse(byte[] data) {
+		coordinate.append(new String(data));
+
+		int pos = coordinate.indexOf("\r\n");
+		
+		if (pos > 0) {
+			coordinate.substring(0, pos).split(" ");
+			coordinate.delete(0, pos);
+		}
+		
+	}
+
+}

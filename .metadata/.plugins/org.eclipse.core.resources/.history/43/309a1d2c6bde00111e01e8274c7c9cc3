@@ -1,0 +1,18 @@
+package com.mntripclient;
+
+import java.util.concurrent.ArrayBlockingQueue;
+
+public class CoordinatesTaskParameter {
+	public ArrayBlockingQueue<byte[]> bluetoothCoordinatesQueue;
+	public GPSOPointOverlay gpsBluetoothOverlay;
+	public GPSOPointOverlay dgpsBluetoothOverlay;
+	public GPSOPointOverlay dgpsBluetoothBufferedOverlay;
+
+	public CoordinatesTaskParameter(ArrayBlockingQueue<byte[]> bluetoothCoordinatesQueue, GPSOPointOverlay gpsBluetoothOverlay, GPSOPointOverlay dgpsBluetoothOverlay,
+			GPSOPointOverlay dgpsBluetoothBufferedOverlay) {
+		this.bluetoothCoordinatesQueue = bluetoothCoordinatesQueue;
+		this.gpsBluetoothOverlay = gpsBluetoothOverlay;
+		this.dgpsBluetoothOverlay = dgpsBluetoothOverlay;
+		this.dgpsBluetoothBufferedOverlay = dgpsBluetoothBufferedOverlay;
+	}
+}

@@ -3228,6 +3228,8 @@ picard.log|/usr/lib64/python2.7/site-packages/picard/log.py
 picard.mbxml|/usr/lib64/python2.7/site-packages/picard/mbxml.py
 picard.metadata|/usr/lib64/python2.7/site-packages/picard/metadata.py
 picard.musicdns.__init__|/usr/lib64/python2.7/site-packages/picard/musicdns/__init__.py
+picard.musicdns.avcodec|/usr/lib64/python2.7/site-packages/picard/musicdns/avcodec.so
+picard.musicdns.ofa|/usr/lib64/python2.7/site-packages/picard/musicdns/ofa.so
 picard.parsefilename|/usr/lib64/python2.7/site-packages/picard/parsefilename.py
 picard.plugin|/usr/lib64/python2.7/site-packages/picard/plugin.py
 picard.plugins.__init__|/usr/lib64/python2.7/site-packages/picard/plugins/__init__.py
@@ -3240,7 +3242,9 @@ picard.track|/usr/lib64/python2.7/site-packages/picard/track.py
 picard.ui.__init__|/usr/lib64/python2.7/site-packages/picard/ui/__init__.py
 picard.ui.cdlookup|/usr/lib64/python2.7/site-packages/picard/ui/cdlookup.py
 picard.ui.coverartbox|/usr/lib64/python2.7/site-packages/picard/ui/coverartbox.py
+picard.ui.edittagdialog|/usr/lib64/python2.7/site-packages/picard/ui/edittagdialog.py
 picard.ui.filebrowser|/usr/lib64/python2.7/site-packages/picard/ui/filebrowser.py
+picard.ui.infodialog|/usr/lib64/python2.7/site-packages/picard/ui/infodialog.py
 picard.ui.item|/usr/lib64/python2.7/site-packages/picard/ui/item.py
 picard.ui.itemviews|/usr/lib64/python2.7/site-packages/picard/ui/itemviews.py
 picard.ui.logview|/usr/lib64/python2.7/site-packages/picard/ui/logview.py
@@ -3258,7 +3262,6 @@ picard.ui.options.general|/usr/lib64/python2.7/site-packages/picard/ui/options/g
 picard.ui.options.interface|/usr/lib64/python2.7/site-packages/picard/ui/options/interface.py
 picard.ui.options.matching|/usr/lib64/python2.7/site-packages/picard/ui/options/matching.py
 picard.ui.options.metadata|/usr/lib64/python2.7/site-packages/picard/ui/options/metadata.py
-picard.ui.options.moving|/usr/lib64/python2.7/site-packages/picard/ui/options/moving.py
 picard.ui.options.plugins|/usr/lib64/python2.7/site-packages/picard/ui/options/plugins.py
 picard.ui.options.proxy|/usr/lib64/python2.7/site-packages/picard/ui/options/proxy.py
 picard.ui.options.ratings|/usr/lib64/python2.7/site-packages/picard/ui/options/ratings.py
@@ -3269,11 +3272,10 @@ picard.ui.options.tags|/usr/lib64/python2.7/site-packages/picard/ui/options/tags
 picard.ui.passworddialog|/usr/lib64/python2.7/site-packages/picard/ui/passworddialog.py
 picard.ui.puidsubmit|/usr/lib64/python2.7/site-packages/picard/ui/puidsubmit.py
 picard.ui.ratingwidget|/usr/lib64/python2.7/site-packages/picard/ui/ratingwidget.py
-picard.ui.tageditor|/usr/lib64/python2.7/site-packages/picard/ui/tageditor.py
 picard.ui.tagsfromfilenames|/usr/lib64/python2.7/site-packages/picard/ui/tagsfromfilenames.py
 picard.ui.ui_cdlookup|/usr/lib64/python2.7/site-packages/picard/ui/ui_cdlookup.py
 picard.ui.ui_edittagdialog|/usr/lib64/python2.7/site-packages/picard/ui/ui_edittagdialog.py
-picard.ui.ui_metadata|/usr/lib64/python2.7/site-packages/picard/ui/ui_metadata.py
+picard.ui.ui_infodialog|/usr/lib64/python2.7/site-packages/picard/ui/ui_infodialog.py
 picard.ui.ui_options|/usr/lib64/python2.7/site-packages/picard/ui/ui_options.py
 picard.ui.ui_options_about|/usr/lib64/python2.7/site-packages/picard/ui/ui_options_about.py
 picard.ui.ui_options_cdlookup|/usr/lib64/python2.7/site-packages/picard/ui/ui_options_cdlookup.py
@@ -3285,7 +3287,6 @@ picard.ui.ui_options_general|/usr/lib64/python2.7/site-packages/picard/ui/ui_opt
 picard.ui.ui_options_interface|/usr/lib64/python2.7/site-packages/picard/ui/ui_options_interface.py
 picard.ui.ui_options_matching|/usr/lib64/python2.7/site-packages/picard/ui/ui_options_matching.py
 picard.ui.ui_options_metadata|/usr/lib64/python2.7/site-packages/picard/ui/ui_options_metadata.py
-picard.ui.ui_options_moving|/usr/lib64/python2.7/site-packages/picard/ui/ui_options_moving.py
 picard.ui.ui_options_plugins|/usr/lib64/python2.7/site-packages/picard/ui/ui_options_plugins.py
 picard.ui.ui_options_proxy|/usr/lib64/python2.7/site-packages/picard/ui/ui_options_proxy.py
 picard.ui.ui_options_ratings|/usr/lib64/python2.7/site-packages/picard/ui/ui_options_ratings.py
@@ -3295,7 +3296,6 @@ picard.ui.ui_options_script|/usr/lib64/python2.7/site-packages/picard/ui/ui_opti
 picard.ui.ui_options_tags|/usr/lib64/python2.7/site-packages/picard/ui/ui_options_tags.py
 picard.ui.ui_passworddialog|/usr/lib64/python2.7/site-packages/picard/ui/ui_passworddialog.py
 picard.ui.ui_puidsubmit|/usr/lib64/python2.7/site-packages/picard/ui/ui_puidsubmit.py
-picard.ui.ui_tageditor|/usr/lib64/python2.7/site-packages/picard/ui/ui_tageditor.py
 picard.ui.ui_tagsfromfilenames|/usr/lib64/python2.7/site-packages/picard/ui/ui_tagsfromfilenames.py
 picard.ui.util|/usr/lib64/python2.7/site-packages/picard/ui/util.py
 picard.util.__init__|/usr/lib64/python2.7/site-packages/picard/util/__init__.py
@@ -4705,6 +4705,8 @@ veusz.embed_remote|/usr/lib64/python2.7/site-packages/veusz/embed_remote.py
 veusz.helpers.__init__|/usr/lib64/python2.7/site-packages/veusz/helpers/__init__.py
 veusz.helpers._nc_cntr|/usr/lib64/python2.7/site-packages/veusz/helpers/_nc_cntr.so
 veusz.helpers.qtloops|/usr/lib64/python2.7/site-packages/veusz/helpers/qtloops.so
+veusz.helpers.qtmml|/usr/lib64/python2.7/site-packages/veusz/helpers/qtmml.so
+veusz.helpers.recordpaint|/usr/lib64/python2.7/site-packages/veusz/helpers/recordpaint.so
 veusz.plugins.__init__|/usr/lib64/python2.7/site-packages/veusz/plugins/__init__.py
 veusz.plugins.datasetplugin|/usr/lib64/python2.7/site-packages/veusz/plugins/datasetplugin.py
 veusz.plugins.field|/usr/lib64/python2.7/site-packages/veusz/plugins/field.py

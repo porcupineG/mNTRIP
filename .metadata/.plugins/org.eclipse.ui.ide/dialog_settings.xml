@@ -18,11 +18,18 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 	</section>
 	<section name="NewWizardAction">
-		<item value="com.android.ide.eclipse.adt.project.NewProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<item value="com.android.ide.eclipse.adt.project.NewSampleProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="com.android.ide.eclipse.wizards.category"/>
 			<item value="com.google.gdt.eclipse.suite.newWizards"/>
 			<item value="org.python.pydev.PythonCategory"/>
 		</list>
+	</section>
+	<section name="CleanDialogSettings">
+		<item value="490" key="DIALOG_WIDTH"/>
+		<item value="367" key="DIALOG_Y_ORIGIN"/>
+		<item value="716" key="DIALOG_X_ORIGIN"/>
+		<item value="372" key="DIALOG_HEIGHT"/>
+		<item value="true" key="TOGGLE_SELECTED"/>
 	</section>
 </section>

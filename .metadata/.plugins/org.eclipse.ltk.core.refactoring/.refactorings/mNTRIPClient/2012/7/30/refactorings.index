@@ -13,3 +13,5 @@
 1343241756556	Rename type 'GPSOPointverlay'
 1343242678516	Rename type 'GPSORouteOverlay'
 1343248089658	Rename method 'initHTTPThread'
+1343339726893	Rename type 'BluetoothThread'
+1343339779623	Delete element

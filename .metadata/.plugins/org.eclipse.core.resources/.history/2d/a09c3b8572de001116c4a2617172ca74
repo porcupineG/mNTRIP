@@ -1,0 +1,86 @@
+package com.mntripclient;
+
+import java.util.concurrent.ArrayBlockingQueue;
+
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.OverlayItem;
+
+import android.util.Log;
+
+public class CoordinatesTask implements Runnable {
+
+	private ArrayBlockingQueue<byte[]> bluetoothCoordinatesQueue;
+	private  GPSOPointOverlay gpsBluetoothOverlay;
+	private GPSOPointOverlay dgpsBluetoothOverlay;
+	private GPSOPointOverlay dgpsBluetoothBufferedOverlay;
+	
+
+	private GeoPoint point;
+	
+	private StringBuffer coordinate;
+	
+	public CoordinatesTask(ArrayBlockingQueue<byte[]> bluetoothCoordinatesQueue, GPSOPointOverlay gpsBluetoothOverlay, GPSOPointOverlay dgpsBluetoothOverlay,
+			GPSOPointOverlay dgpsBluetoothBufferedOverlay) {
+		
+		this.bluetoothCoordinatesQueue = bluetoothCoordinatesQueue;
+		this.gpsBluetoothOverlay = gpsBluetoothOverlay;
+		this.dgpsBluetoothBufferedOverlay = dgpsBluetoothBufferedOverlay;
+		this.dgpsBluetoothOverlay = dgpsBluetoothOverlay;
+		
+		coordinate = new StringBuffer();
+		
+		// TODO Auto-generated constructor stub
+	}
+
+	public void run() {
+		while (true) {
+			try {
+				parse(bluetoothCoordinatesQueue.take());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private void parse(byte[] data) {
+		coordinate.append(new String(data));
+
+		int pos = coordinate.indexOf("\r\n");
+		
+		if (pos > 0) {
+			String[] components = coordinate.substring(0, pos).split(" ");
+			coordinate.delete(0, pos);
+			if (components.length == 4) {
+				if (components[0] == "GPSB") {
+					int time = Integer.parseInt(components[1]);
+					double lat = Double.parseDouble(components[2]);
+					double lon = Double.parseDouble(components[3]);
+					point = new GeoPoint((int) (lat* 1000000.0), (int) (lon * 1000000.0));
+					gpsBluetoothOverlay.addUniqueOverlay(new OverlayItem(point, "GPSB", ""));
+					FileLog.getInstance().log("GPSPhone " + time + " " + lat + " " + lon + "\n\r");
+				}
+				
+				if (components[0] == "DGPS") {
+					int time = Integer.parseInt(components[1]);
+					double lat = Double.parseDouble(components[2]);
+					double lon = Double.parseDouble(components[3]);
+					point = new GeoPoint((int) (lat* 1000000.0), (int) (lon * 1000000.0));
+					gpsBluetoothOverlay.addUniqueOverlay(new OverlayItem(point, "DGPS", ""));
+					FileLog.getInstance().log("GPSPhone " + time + " " + lat + " " + lon + "\n\r");
+				}
+				
+				if (components[0] == "BUFF") {
+					int time = Integer.parseInt(components[1]);
+					double lat = Double.parseDouble(components[2]);
+					double lon = Double.parseDouble(components[3]);
+					point = new GeoPoint((int) (lat* 1000000.0), (int) (lon * 1000000.0));
+					gpsBluetoothOverlay.addUniqueOverlay(new OverlayItem(point, "BUFF", ""));
+					FileLog.getInstance().log("GPSPhone " + time + " " + lat + " " + lon + "\n\r");
+				}
+				
+			}
+		}
+		
+	}
+
+}

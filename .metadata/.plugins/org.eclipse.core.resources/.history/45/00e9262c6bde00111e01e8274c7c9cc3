@@ -1,0 +1,16 @@
+package com.mntripclient;
+
+
+public class CoordinatesTask implements Runnable {
+
+	public CoordinatesTask(CoordinatesTaskParameter parameterObject) {
+		
+		// TODO Auto-generated constructor stub
+	}
+
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

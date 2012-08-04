@@ -24,12 +24,18 @@
 		<item value="132" key="DIALOG_Y_ORIGIN"/>
 		<item value="555" key="DIALOG_X_ORIGIN"/>
 	</section>
+	<section name="NewWizardAction">
+		<item value="com.android.ide.eclipse.adt.project.NewSampleProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="com.android.ide.eclipse.wizards.category"/>
+		</list>
+	</section>
 	<section name="ShowViewDialog">
 		<item value="358" key="DIALOG_WIDTH"/>
 		<item value="com.android.ide.eclipse.ddms.views.LogCatView" key="ShowViewDialog.STORE_SELECTED_VIEW_ID"/>
 		<item value="311" key="DIALOG_Y_ORIGIN"/>
-		<item value="421" key="DIALOG_HEIGHT"/>
 		<item value="784" key="DIALOG_X_ORIGIN"/>
+		<item value="421" key="DIALOG_HEIGHT"/>
 		<item value="1|Sans Serif|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 		<list key="ShowViewDialog.STORE_EXPANDED_CATEGORIES_ID">
 			<item value="com.android.ide.eclipse.ddms.views.category"/>

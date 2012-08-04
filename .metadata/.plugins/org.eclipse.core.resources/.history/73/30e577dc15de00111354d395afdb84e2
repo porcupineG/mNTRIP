@@ -1,0 +1,51 @@
+package com.mntripclient;
+
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
+import android.widget.ArrayAdapter;
+
+public class mNTRIPBluetoothTask implements Runnable {
+
+	private BluetoothAdapter mBluetoothAdapter;
+	private final ExecutorService bluetoothExecutorService;
+	private Activity activity;
+	public final static int REQUEST_ENABLE_BT = 1;
+	public static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+
+	public mNTRIPBluetoothTask(ExecutorService bluetoothExecutorService, Activity activity) {
+		this.bluetoothExecutorService = bluetoothExecutorService;
+		this.activity = activity;
+
+		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+		if (!mBluetoothAdapter.isEnabled()) {
+			Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			this.activity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+		} else {
+			connect();
+		}
+	}
+
+	public void run() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		@SuppressWarnings("unused")
+		Future<?> future = bluetoothExecutorService.submit(this);
+	}
+
+	public void connect() {
+		ConnectThread t = new ConnectThread(mBluetoothAdapter.getRemoteDevice("00:12:6F:27:04:CE"));
+		t.start();
+
+	}
+
+}

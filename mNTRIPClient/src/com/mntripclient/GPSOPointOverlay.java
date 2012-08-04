@@ -14,13 +14,10 @@ import com.google.android.maps.OverlayItem;
 public class GPSOPointOverlay extends ItemizedOverlay<OverlayItem> {
 
 	private ArrayList<OverlayItem> overlays = new ArrayList<OverlayItem>();
-	private MapView mapView;
 	
-	public GPSOPointOverlay(Drawable defaultMarker, MapView mapView) {
+	public GPSOPointOverlay(Drawable defaultMarker) {
 		super(boundCenterBottom(defaultMarker));
-		this.mapView = mapView;
 		populate();
-		mapView.invalidate();
 	}
 
 	@Override
@@ -33,7 +30,6 @@ public class GPSOPointOverlay extends ItemizedOverlay<OverlayItem> {
 	public void addOverlay(OverlayItem overlay) {
 		overlays.add(overlay);
 		populate();
-		mapView.invalidate();
 	}
 
 	@Override
@@ -49,7 +45,6 @@ public class GPSOPointOverlay extends ItemizedOverlay<OverlayItem> {
 	public void clear() {
 		overlays.clear();
 		populate();
-		mapView.invalidate();
 	}
 	
 	public void addUniqueOverlay(OverlayItem overlay) {
@@ -57,7 +52,6 @@ public class GPSOPointOverlay extends ItemizedOverlay<OverlayItem> {
 		populate();
 		overlays.add(overlay);
 		populate();
-		mapView.invalidate();
 	}
 
 }

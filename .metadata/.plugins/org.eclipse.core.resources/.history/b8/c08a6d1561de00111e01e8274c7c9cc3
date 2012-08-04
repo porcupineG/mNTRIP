@@ -1,0 +1,88 @@
+package com.mntripclient;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.UUID;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
+import android.util.Log;
+
+public class BluetoothTask implements Runnable {
+
+	private ArrayBlockingQueue<byte []> bluetoothHttpQueue;
+	
+	private ExecutorService sendExecutorService;
+	private ExecutorService recieveExecutorService;
+	
+	private BluetoothAdapter bluetoothAdapter;
+	
+	private static final String REMOTE_ADDRESS = "00:12:6F:27:04:CE";
+    private static final UUID REMOTE_UUID= UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+	private BluetoothSocket socket;
+	private InputStream inputStream = null;
+	private OutputStream outputStream = null;
+	
+	public BluetoothTask(ArrayBlockingQueue<byte []> bluetoothHttpQueue) {
+		this.bluetoothHttpQueue = bluetoothHttpQueue;
+	}
+
+	public void run() {
+		
+		bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		
+		sendExecutorService = Executors.newSingleThreadExecutor();
+		sendExecutorService.execute(new SendThread());
+
+		recieveExecutorService = Executors.newSingleThreadExecutor();
+		recieveExecutorService.execute(new RecieveThread());
+		
+		BluetoothDevice remoteDevice = bluetoothAdapter.getRemoteDevice(REMOTE_ADDRESS);
+		try {
+			socket = remoteDevice.createRfcommSocketToServiceRecord(REMOTE_UUID);
+			socket.connect();
+			
+			inputStream = socket.getInputStream();
+			outputStream = socket.getOutputStream();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		bluetoothAdapter.cancelDiscovery();
+
+	}
+	
+	private class SendThread implements Runnable {
+		
+		public void run() {
+			while (true) {
+				try {
+					send(bluetoothHttpQueue.take());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		private void send(byte[] data) {
+			Log.d("DUPA", new String(data));
+		}
+		
+	}
+
+	private class RecieveThread implements Runnable {
+
+		public void run() {			
+			while (true) {
+				
+			}
+		}
+		
+	}
+
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="309" key="DIALOG_WIDTH"/>
+		<item value="199" key="DIALOG_Y_ORIGIN"/>
+		<item value="966" key="DIALOG_X_ORIGIN"/>
+		<item value="405" key="DIALOG_HEIGHT"/>
+		<item value="1|Sans Serif|9.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="incremental"/>
+		<item value="false" key="wholeword"/>
+		<item value="AcceptThread" key="selection"/>
+		<list key="findhistory">
+			<item value="AcceptThread"/>
+			<item value="mmInStream"/>
+			<item value="socket"/>
+			<item value="&#x09;printf(&quot;ATR1 %u\n\r&quot;, bluetooth_send_at(&quot;ATR1\r&quot;, &quot;ATR1\r\r\nOK\r\n&quot;, 1));&#x0A;&#x09;timer_delay(3500);"/>
+			<item value="UUID"/>
+			<item value="uuid"/>
+			<item value="ConnectThread"/>
+			<item value="mNewDevicesArrayAdapter"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+</section>

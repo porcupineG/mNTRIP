@@ -1,0 +1,17 @@
+1343936513445	Move type 'ConnectThread' to new file
+1343937018729	Move type 'ConnectedThread' to new file
+1344072124325	Delete elements
+1344072127241	Delete element
+1344074038593	Copy file
+1344074110889	Delete element
+1344074181159	Delete element
+1344074225809	Delete element
+1344099167812	Delete elements
+1344099180564	Delete elements
+1344099201831	Delete element
+1344099678518	Rename type 'NTRIPCasterDownloadTask'
+1344099699823	Rename method 'initNTRIPCasterDownloadTask'
+1344099828399	Rename method 'initBluetoothask'
+1344100276792	Rename field 'bluetoothHttpQueue'
+1344100294381	Rename local variable 'bluetoothHttpQueue'
+1344100391377	Rename field 'bluetoothHttpQueue'

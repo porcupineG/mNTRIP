@@ -1,0 +1,18 @@
+package com.mntripclient;
+
+import java.util.concurrent.ArrayBlockingQueue;
+
+public class CoordinatesTask implements Runnable {
+
+	public CoordinatesTask(ArrayBlockingQueue<byte[]> bluetoothCoordinatesQueue, GPSOPointOverlay gpsBluetoothOverlay, GPSOPointOverlay dgpsBluetoothOverlay,
+			GPSOPointOverlay dgpsBluetoothBufferedOverlay) {
+		
+		// TODO Auto-generated constructor stub
+	}
+
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

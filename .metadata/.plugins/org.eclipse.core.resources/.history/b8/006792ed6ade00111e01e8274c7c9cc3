@@ -1,0 +1,72 @@
+package com.mntripclient;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ArrayBlockingQueue;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.util.EntityUtils;
+
+import android.net.http.AndroidHttpClient;
+
+public class HTTPTask implements Runnable {
+
+	private static String MOUNTPOINT = "http://mntripcaster.appspot.com/mntripstr0";
+
+	private static String basicAuthString = "bU5UUklQVXNlcjptTlRSSVBQYXNzd29yZA==";
+
+	private AndroidHttpClient httpClient;
+	private URI uri;
+
+	private HttpGet request;
+	private HttpResponse response;
+
+	private byte[] content;
+
+	private ArrayBlockingQueue<byte[]> httpBluetoothQueue;
+
+	private Timer timer;
+
+	public HTTPTask(ArrayBlockingQueue<byte[]> httpBluetoothQueue) {
+		this.httpBluetoothQueue = httpBluetoothQueue;
+	}
+
+	public void run() {
+		httpClient = AndroidHttpClient.newInstance("mNTRIPCasterDownload");
+
+		content = new byte[1000];
+
+		try {
+			uri = new URI(MOUNTPOINT);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
+		request = new HttpGet();
+		request.setURI(uri);
+		request.addHeader("Authorization", "Basic " + basicAuthString);
+		request.addHeader("Ntrip-Version", "Ntrip/2.0");
+		
+		timer = new Timer();
+		timer.scheduleAtFixedRate(new RequestTask(), 0, 1000);
+		
+	}
+
+	private class RequestTask extends TimerTask {
+
+		public void run() {
+			try {
+				response = httpClient.execute(request);
+				content = EntityUtils.toByteArray(response.getEntity());
+				httpBluetoothQueue.add(content);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+}

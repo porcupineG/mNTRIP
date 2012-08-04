@@ -18,8 +18,8 @@ public class GPSPhoneListener implements LocationListener {
 	
 	public void onLocationChanged(Location location) {
 		point = new GeoPoint((int) (location.getLatitude() * 1000000.0), (int) (location.getLongitude() * 1000000.0));
-		gpsOverlay.addUniqueOverlay(new OverlayItem(point, "GPS Phone", ""));
-		FileLog.getInstance().log("GPSPhone " + location.getTime() + " " + location.getLatitude() + " " + location.getLatitude() + "\n\r");
+		gpsOverlay.addUniqueOverlay(new OverlayItem(point, "GPSP", ""));
+		FileLog.getInstance().log("GPSP " + location.getTime() + " " + location.getLatitude() + " " + location.getLatitude() + "\r\n");
 	}
 
 	public void onProviderDisabled(String provider) {
