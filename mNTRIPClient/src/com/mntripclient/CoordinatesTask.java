@@ -2,6 +2,8 @@ package com.mntripclient;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
+import android.util.Log;
+
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;
 
@@ -34,13 +36,14 @@ public class CoordinatesTask implements Runnable {
 			try {
 				parse(bluetoothCoordinatesQueue.take());
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				Log.e("mNTRIPClient", e.getMessage());
 			}
 		}
 	}
 
 	private void parse(byte[] data) {
 		coordinate.append(new String(data));
+		Log.e("mNTRIPClient", new String(data));
 
 		int pos = coordinate.indexOf("\r\n");
 
@@ -50,6 +53,7 @@ public class CoordinatesTask implements Runnable {
 
 			if (components.length == 4) {
 				if ((components[0].compareTo("BUFF") == 0) || (components[0].compareTo("GPSB") == 0) || (components[0].compareTo("DGPS") == 0)) {
+
 					int time = Integer.parseInt(components[1]);
 					double lat = Double.parseDouble(components[2]);
 					double lon = Double.parseDouble(components[3]);

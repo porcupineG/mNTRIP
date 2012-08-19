@@ -41,8 +41,8 @@ public class MainActivity extends MapActivity {
 
 		subcribeLocationManager();
 		
-		httpBluetoothQueue = new ArrayBlockingQueue<byte[]>(10);
-		bluetoothCoordinatesQueue = new ArrayBlockingQueue<byte[]>(10);
+		httpBluetoothQueue = new ArrayBlockingQueue<byte[]>(100);
+		bluetoothCoordinatesQueue = new ArrayBlockingQueue<byte[]>(100);
 		
 		new Thread(FileLog.getInstance()).start();
 		new Thread(new HTTPTask(httpBluetoothQueue)).start();

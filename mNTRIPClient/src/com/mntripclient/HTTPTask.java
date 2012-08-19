@@ -7,10 +7,16 @@ import java.util.TimerTask;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.util.EntityUtils;
 
 import android.net.http.AndroidHttpClient;
+import android.util.Log;
 
 public class HTTPTask implements Runnable {
 
@@ -32,38 +38,44 @@ public class HTTPTask implements Runnable {
 
 	public HTTPTask(ArrayBlockingQueue<byte[]> httpBluetoothQueue) {
 		this.httpBluetoothQueue = httpBluetoothQueue;
-	}
-
-	public void run() {
-		httpClient = AndroidHttpClient.newInstance("mNTRIPCasterDownload");
-
+		
+		httpClient = AndroidHttpClient.newInstance("mNTRIPClient");
+				
 		content = new byte[1000];
 
 		try {
 			uri = new URI(MOUNTPOINT);
 		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			Log.e("mNTRIPClient", e.getMessage());
 		}
 
 		request = new HttpGet();
 		request.setURI(uri);
 		request.addHeader("Authorization", "Basic " + basicAuthString);
 		request.addHeader("Ntrip-Version", "Ntrip/2.0");
+		request.addHeader("Connection", "Close");
 		
-		timer = new Timer();
-		timer.scheduleAtFixedRate(new RequestTask(), 0, 1000);
+		new Thread(new RequestTask()).start();		
+	}
+
+	public void run() {
 		
 	}
 
 	private class RequestTask extends TimerTask {
 
 		public void run() {
-			try {
-				response = httpClient.execute(request);
-				content = EntityUtils.toByteArray(response.getEntity());
-				httpBluetoothQueue.add(content);
-			} catch (Exception e) {
-				e.printStackTrace();
+			while (true) {
+				try {
+					if (httpBluetoothQueue.remainingCapacity() > 0) {
+						response = httpClient.execute(request);
+						content = EntityUtils.toByteArray(response.getEntity());						
+						httpBluetoothQueue.add(content);
+					}					
+					Thread.sleep(800);
+				} catch (Exception e) {
+					Log.e("mNTRIPClient", e.getMessage());
+				}
 			}
 		}
 

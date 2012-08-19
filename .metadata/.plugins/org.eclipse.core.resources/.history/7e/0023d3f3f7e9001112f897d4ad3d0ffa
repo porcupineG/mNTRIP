@@ -1,0 +1,98 @@
+package com.mntripclient;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.ArrayBlockingQueue;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
+import org.apache.http.util.EntityUtils;
+
+import android.net.http.AndroidHttpClient;
+import android.util.Log;
+
+public class HTTPTask implements Runnable {
+
+	private static String MOUNTPOINT = "http://mntripcaster.appspot.com/mntripstr0";
+
+	private static String basicAuthString = "bU5UUklQVXNlcjptTlRSSVBQYXNzd29yZA==";
+
+	private DefaultHttpClient httpClient;
+	private URI uri;
+
+	private HttpGet request;
+	private HttpResponse response;
+
+	private byte[] content;
+
+	private ArrayBlockingQueue<byte[]> httpBluetoothQueue;
+
+	private Timer timer;
+
+	public HTTPTask(ArrayBlockingQueue<byte[]> httpBluetoothQueue) {
+		this.httpBluetoothQueue = httpBluetoothQueue;
+	}
+
+	public void run() {
+		HttpParams params = new BasicHttpParams();
+		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+		httpClient = new DefaultHttpClient(params);
+		
+		content = new byte[1000];
+
+		try {
+			uri = new URI(MOUNTPOINT);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+
+		request = new HttpGet();
+		request.setURI(uri);
+		request.addHeader("Authorization", "Basic " + basicAuthString);
+		request.addHeader("Ntrip-Version", "Ntrip/2.0");
+		request.addHeader("Connection", "Close");
+		
+//		timer = new Timer();
+//		timer.scheduleAtFixedRate(new RequestTask(), 0, 1000);
+		
+		new Thread(new RequestTask()).start();
+		
+	}
+
+	private class RequestTask extends TimerTask {
+
+		public void run() {
+			while (true) {
+				try {
+					Log.e("DUPA", "1");
+					response = httpClient.execute(request);
+					Log.e("DUPA", "2");
+				
+					content = EntityUtils.toByteArray(response.getEntity());
+					Log.e("DUPA", "3");
+					
+					httpBluetoothQueue.add(content);
+					Log.e("DUPA", "4");
+					
+					Log.e("DUPA", "HTTP: " + new String(content));
+
+//					Log.e("DUPA", "HTTP: " + new String("dupa"));
+//					httpBluetoothQueue.add(new String("dupa").getBytes());
+					
+					Thread.sleep(1000);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+}
